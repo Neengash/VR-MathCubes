@@ -1638,6 +1638,8 @@ MonoBehaviour:
   successMenu: {fileID: 847297404}
   levels:
   - {fileID: 117704677, guid: f1321f9842ef7e547af1da7eec48904e, type: 3}
+  - {fileID: 117704677, guid: 8f96e8326f7b10440b41cb47929489c5, type: 3}
+  - {fileID: 117704677, guid: 5a134673af50cdc42bb51a732cc78fd6, type: 3}
 --- !u!1 &498699042
 GameObject:
   m_ObjectHideFlags: 0
@@ -2292,7 +2294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8983147396643144210, guid: 9fe04ad460180da4db9577cf176c26c3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fe04ad460180da4db9577cf176c26c3, type: 3}
