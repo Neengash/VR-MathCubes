@@ -55,7 +55,9 @@ public class VRMenu : MonoBehaviour
             gazedObject = hit;
             gazedObject?.OnPointerEnter();
         }
-        VRPointer.instance.SetColor(gazedObject.holdColor);
+        if (gazedObject.InteractionsEnabled) {
+            VRPointer.instance.SetColor(gazedObject.holdColor);
+        }
     }
 
     private void NoObjectInSight() {
@@ -68,7 +70,10 @@ public class VRMenu : MonoBehaviour
     private void ObjectInteraction(VRInteraction hit) {
         if (gazedObject != null) {
             gazedObject.OnPointerClick();
-            VRPointer.instance.SetColor(gazedObject.clickColor);
+
+            if (gazedObject.InteractionsEnabled) {
+                VRPointer.instance.SetColor(gazedObject.clickColor);
+            }
         }
     }
 

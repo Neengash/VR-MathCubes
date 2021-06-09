@@ -7,6 +7,7 @@ public class TextPlayer : MonoBehaviour
 {
     public static TextPlayer instance;
 
+    [SerializeField] GameObject panel;
     [SerializeField] public TextMeshProUGUI text;
     [SerializeField] float timeBetweenTypes = 0.02f;
     [SerializeField] float timeUntilClear = 5f;
@@ -15,14 +16,15 @@ public class TextPlayer : MonoBehaviour
 
     private void Start() {
         instance = this;
+        panel.SetActive(false);
     }
     public void writeSentence(string sentence) {
+        panel.SetActive(true);
         if (currentCorroutine != null) { StopCoroutine(currentCorroutine); }
         currentCorroutine = StartCoroutine(type(sentence));
     }
 
     IEnumerator type(string sentence) {
-        
         text.text = "";
 
         foreach (char letter in sentence.ToCharArray()) {
@@ -34,5 +36,6 @@ public class TextPlayer : MonoBehaviour
 
         text.text = "";
         currentCorroutine = null;
+        panel.SetActive(false);
     }
 }

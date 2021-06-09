@@ -4,6 +4,8 @@ using UnityEngine.Events;
 
 public class VRInteraction : MonoBehaviour
 {
+    public bool InteractionsEnabled = true;
+
     [SerializeField, Range(0.5f, 10f)]
     private float LoadTime = 2f;
 
@@ -15,6 +17,12 @@ public class VRInteraction : MonoBehaviour
     UnityEvent onPointerEnter, onPointerExit, onPointerClick, onPointerLoad;
 
     public void OnPointerEnter() {
+        if (InteractionsEnabled) {
+            DoOnPointerEnter();
+        }
+    }
+
+    private void DoOnPointerEnter() {
         onPointerEnter?.Invoke();
 
         if (onPointerLoad.GetPersistentEventCount() > 0) {
@@ -23,6 +31,12 @@ public class VRInteraction : MonoBehaviour
     }
 
     public void OnPointerExit() {
+        if (InteractionsEnabled) {
+            DoOnPointerExit();
+        }
+    }
+
+    private void DoOnPointerExit() {
         onPointerExit?.Invoke();
 
         if (loadingCoroutine != null) {
@@ -33,6 +47,12 @@ public class VRInteraction : MonoBehaviour
     }
 
     public void OnPointerClick() {
+        if (InteractionsEnabled) {
+            DoOnPointerClick();
+        }
+    }
+
+    private void DoOnPointerClick() {
         onPointerClick?.Invoke();
     }
 
