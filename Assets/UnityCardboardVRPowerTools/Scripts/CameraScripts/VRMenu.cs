@@ -6,7 +6,6 @@ using System.Collections;
 
 public class VRMenu : MonoBehaviour
 {
-    [SerializeField] bool FollowCamera = true;
     [SerializeField] Transform VRCameraTransform, ownTransform;
     [SerializeField] Camera m_camera;
 
@@ -47,7 +46,28 @@ public class VRMenu : MonoBehaviour
         } else if (gazedObject != null) {
             NoObjectInSight();
         }
+
+// Android fix for late Update (see below)
+#if UNITY_ANDROID && !UNITY_EDITOR
+        ownTransform.rotation = Quaternion.Euler(
+            0, 
+            VRCameraTransform.rotation.eulerAngles.y,
+            0
+        );
+#endif
     }
+
+// Due to some unexpected behaviours late update was not working well
+// when run on the android device
+#if !UNITY_ANDROID || UNITY_EDITOR
+    void LateUpdate() {
+        ownTransform.rotation = Quaternion.Euler(
+            0, 
+            VRCameraTransform.rotation.eulerAngles.y,
+            0
+        );
+    }
+#endif
 
     private void ObjectInSight(VRInteraction hit) {
         if (hit != gazedObject) {
@@ -74,16 +94,6 @@ public class VRMenu : MonoBehaviour
             if (gazedObject.InteractionsEnabled) {
                 VRPointer.instance.SetColor(gazedObject.clickColor);
             }
-        }
-    }
-
-    void LateUpdate() {
-        if (FollowCamera) {
-            ownTransform.rotation = Quaternion.Euler(
-                ownTransform.rotation.eulerAngles.x,
-                VRCameraTransform.rotation.eulerAngles.y,
-                ownTransform.rotation.eulerAngles.z
-            );
         }
     }
 }

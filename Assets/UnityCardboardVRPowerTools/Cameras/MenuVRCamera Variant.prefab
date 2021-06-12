@@ -112,7 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 121d24fa13a73554485c925b9003a812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FollowCamera: 1
   VRCameraTransform: {fileID: 8106452292827425015}
   ownTransform: {fileID: 1818058499753890584}
   m_camera: {fileID: 8106452292827425014}
