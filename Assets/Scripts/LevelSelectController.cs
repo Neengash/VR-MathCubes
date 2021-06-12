@@ -51,7 +51,10 @@ public class LevelSelectController : MonoBehaviour
     }
 
     private void CheckLevelButtonsAvailable() {
-        if (currentLevel < maxLevel) {
+        if (
+            currentLevel < maxLevel &&
+            currentLevel < GameManager.instance.GetLevelsCount() -1
+        ) {
             EnableButton(lvlUp);
         } else {
             DissableButton(lvlUp);

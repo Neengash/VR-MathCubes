@@ -1546,7 +1546,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 308000771}
   m_OnClick:
     m_PersistentCalls:
@@ -1640,6 +1640,7 @@ MonoBehaviour:
   - {fileID: 117704677, guid: f1321f9842ef7e547af1da7eec48904e, type: 3}
   - {fileID: 117704677, guid: 8f96e8326f7b10440b41cb47929489c5, type: 3}
   - {fileID: 117704677, guid: 5a134673af50cdc42bb51a732cc78fd6, type: 3}
+  nextLevelButton: {fileID: 308000770}
 --- !u!1 &498699042
 GameObject:
   m_ObjectHideFlags: 0

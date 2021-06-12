@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] VRPointer vrCamera;
     [SerializeField] GameObject mainMenu, pauseMenu, successMenu;
     [SerializeField] LevelController[] levels;
+    [SerializeField] Button nextLevelButton;
 
     TimerController timerController;
     LevelController currentLevel;
@@ -32,18 +34,45 @@ public class GameManager : MonoBehaviour
         vrCamera.ActiveVRInteractions = true;
     }
 
+    public int GetLevelsCount() {
+        return levels.Length;
+    }
+
     public bool CheckWinCondition() {
         return currentLevel.CheckWinCondition();
     }
 
     public void LevelComplete() {
         timerController.PauseTime();
+        CheckNextLevelButton();
         successMenu.SetActive(true);
         vrCamera.ActiveVRInteractions = false;
         if (LevelSelectController.instance.currentLevel == LevelSelectController.instance.maxLevel) {
             LevelSelectController.instance.maxLevel++;
         }
         LevelSelectController.instance.UpdateInterface();
+    }
+
+    private void CheckNextLevelButton() {
+        if (LevelSelectController.instance.currentLevel == levels.Length -1) {
+            DissableButton();
+        } else {
+            EnableButton();
+        }
+    }
+
+    private void EnableButton() {
+        ColorBlock colors = nextLevelButton.colors;
+        colors.colorMultiplier = 5f;
+        nextLevelButton.colors = colors;
+        nextLevelButton.GetComponent<VRInteraction>().InteractionsEnabled = true; 
+    }
+
+    private void DissableButton() {
+        ColorBlock colors = nextLevelButton.colors;
+        colors.colorMultiplier = 1f;
+        nextLevelButton.colors = colors;
+        nextLevelButton.GetComponent<VRInteraction>().InteractionsEnabled = false; 
     }
 
     public void AdvanceLevel() {
